@@ -62,12 +62,11 @@ RUN sed -i '/^bind-address*/ s/127.0.0.1/0.0.0.0/' /etc/my.cnf
 # Run the db
 RUN mkdir /run/mysqld
 RUN mysql_install_db
-RUN mysqld -u root --data=./data --log-error=/var/log/mysql_error.log --pid-file=/var/run/mysqld/mysqld.pid &
-RUN sleep 3
+RUN mysqld -u root --data=./data --log-error=/var/log/mysql_error.log --pid-file=/var/run/mysqld/mysqld.pid
 # Configure MySQL for WordPress
-COPY mysql-config.sql /tmp/
-RUN mysql -u root < /tmp/mysql-config.sql \
-    && rm /tmp/mysql-config.sql
+# COPY mysql-config.sql /tmp/
+# RUN mysql -u root < /tmp/mysql-config.sql \
+#     && rm /tmp/mysql-config.sql
 #------------------
 
 # Configure nginx
