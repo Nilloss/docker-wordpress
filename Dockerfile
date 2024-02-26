@@ -36,6 +36,24 @@ RUN apk --no-cache add \
   bash \
   less
 
+#---- SSH STUFF-----
+# Create the SSH directory
+RUN mkdir -p /root/.ssh
+
+# Copy the public key to the Docker build context
+COPY container_key.pub /root/.ssh/authorized_keys
+
+# Install OpenSSH server
+RUN apk --no-cache add openssh-server
+
+# Configure SSH
+RUN ssh-keygen -A && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
+
+# Expose SSH port
+EXPOSE 22
+
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
 
