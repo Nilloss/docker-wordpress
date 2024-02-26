@@ -53,8 +53,6 @@ EXPOSE 22
 #------------------
 
 #---- DB SETUP ----
-#Install
-#RUN apk add mysql mysql-client
 # Install MariaDB
 RUN apk add --no-cache mariadb mariadb-client
 
@@ -63,9 +61,6 @@ RUN chown -R mysql:mysql /var/lib/mysql
 
 # Initialize MariaDB data directory
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
-
-# Configure MySQL for WordPress
-COPY mysql-config.sql /tmp/
 #------------------
 
 # Configure nginx
