@@ -60,14 +60,14 @@ RUN apk add mysql mysql-client
 #RUN mkdir /run/mysqld
 RUN mkdir -p /var/lib/mysql/
 RUN mysql_install_db && chown -R mysql:mysql /var/lib/mysql/
-RUN mysqld -u root --datadir=./data --log-error=/var/log/mysql_error.log --pid-file=/var/run/mysqld/mysqld.pid &
+#RUN mysqld -u root --datadir=./data --log-error=/var/log/mysql_error.log --pid-file=/var/run/mysqld/mysqld.pid &
 
 # allow access from any IP
 RUN sed -i '/^bind-address*/ s/127.0.0.1/0.0.0.0/' /etc/my.cnf
 # Configure MySQL for WordPress
-COPY mysql-config.sql /tmp/
-RUN mysql -u root < /tmp/mysql-config.sql \
-    && rm /tmp/mysql-config.sql
+# COPY mysql-config.sql /tmp/
+# RUN mysql -u root < /tmp/mysql-config.sql \
+#     && rm /tmp/mysql-config.sql
 #------------------
 
 # Configure nginx
