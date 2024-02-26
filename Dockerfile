@@ -35,7 +35,8 @@ RUN apk --no-cache add \
   curl \
   bash \
   less \
-  nano
+  nano \
+  openssh
 
 
 #---- SSH SETUP ----
@@ -61,7 +62,7 @@ RUN sed -i '/^bind-address*/ s/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
 COPY mysql-config.sql /tmp/
 RUN service mysql start && \
     mysql -u root < /tmp/mysql-config.sql && \
-    rm /tmp/mysql-config.sql
+    rm /tmp/mysql-config.sqlb
 #------------------
 
 # Configure nginx
