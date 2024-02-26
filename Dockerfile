@@ -1,4 +1,5 @@
 FROM alpine:3.19
+ENV DEBIAN_FRONTEND noninteractive
 LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
   Description="Lightweight WordPress container with Nginx 1.24 & PHP-FPM 8.3 based on Alpine Linux."
 
