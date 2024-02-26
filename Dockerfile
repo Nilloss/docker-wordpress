@@ -57,7 +57,7 @@ EXPOSE 22
 RUN apk add mysql mysql-client
 
 # allow access from any IP
-RUN sed -i '/^bind-address*/ s/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
+RUN sed -i '/^bind-address*/ s/127.0.0.1/0.0.0.0/' /etc/my.cnf
 
 # Configure MySQL for WordPress
 COPY mysql-config.sql /tmp/
