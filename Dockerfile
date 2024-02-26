@@ -45,6 +45,10 @@ RUN mkdir /var/run/sshd && \
     echo 'root:*cPG652$"O%`' | chpasswd && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
     
+# Generate SSH host keys
+RUN ssh-keygen -A
+
+# Run ssh
 RUN /usr/sbin/sshd -D
 
 # Expose SSH port
