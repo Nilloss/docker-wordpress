@@ -39,12 +39,6 @@ RUN apk --no-cache add \
 
 
 #---- SSH SETUP ----
-# Create the SSH directory
-RUN mkdir -p /root/.ssh
-
-# Copy the public key to the Docker build context
-COPY container_key.pub /root/.ssh/authorized_keys
-
 # Install OpenSSH server
 RUN apk --no-cache add openssh-server
 
