@@ -31,8 +31,6 @@ RUN apk --no-cache add \
   php83-session \
   php83-tokenizer \
   nginx \
-  mysql-server \
-  php-mysql \
   supervisor \
   curl \
   bash \
@@ -53,6 +51,9 @@ EXPOSE 22
 #------------------
 
 #---- DB SETUP ----
+#Install
+RUN apk add mysql mysql-client
+RUN docker-php-ext-install mysqli
 # allow access from any IP
 RUN sed -i '/^bind-address*/ s/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
 
