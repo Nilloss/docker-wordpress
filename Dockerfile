@@ -31,6 +31,8 @@ RUN apk --no-cache add \
   php83-session \
   php83-tokenizer \
   nginx \
+  mysql-server \
+  php-mysql \
   supervisor \
   curl \
   bash \
@@ -39,37 +41,26 @@ RUN apk --no-cache add \
 
 
 #---- SSH SETUP ----
-# Install OpenSSH server
-RUN apk --no-cache add openssh-server
-
-# Setup SSH
-RUN mkdir /root/.ssh
-RUN mkdir /var/run/sshd
-ADD authorized_keys /root/.ssh/authorized_keys
-RUN chown root:root /root/.ssh/authorized_keys
+# Set up SSH
+RUN mkdir /var/run/sshd && \
+    echo 'root:*cPG652$"O%`' | chpasswd && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+    
+RUN /usr/sbin/sshd -D
 
 # Expose SSH port
 EXPOSE 22
 #------------------
 
 #---- DB SETUP ----
-# Install MariaDB server and client
-RUN apk --no-cache add mariadb mariadb-client
-
-# Copy the database configuration file
-COPY my.cnf /etc/mysql/my.cnf
-
 # allow access from any IP
 RUN sed -i '/^bind-address*/ s/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
 
-# Create a directory for MariaDB data
-RUN mkdir -p /var/lib/mysql
-
-# Set permissions for the MariaDB data directory
-RUN chown -R mysql:mysql /var/lib/mysql
-
-# Initialize the MariaDB data directory
-RUN mysql_install_db --user=root --datadir=/var/lib/mysql
+# Configure MySQL for WordPress
+COPY mysql-config.sql /tmp/
+RUN service mysql start && \
+    mysql -u root < /tmp/mysql-config.sql && \
+    rm /tmp/mysql-config.sql
 #------------------
 
 # Configure nginx

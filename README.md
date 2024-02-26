@@ -33,11 +33,11 @@ Or
 
     docker run -d -p 80:80 -p 22220:22 \
     -e "DB_HOST=localhost" \
-    -e "DB_NAME=mydatabase" \
-    -e "DB_USER=root" \
-    -e "DB_PASSWORD=mypassword" \
+    -e "DB_NAME=wordpress" \
+    -e "DB_USER=wordpress_user" \
+    -e "DB_PASSWORD=wordpress_password" \
     -e "FS_METHOD=direct" \
-    --name trafex_test_5 \
+    --name trafex_test_6 \
     trafex-custom
 
 ### WP-CLI
