@@ -48,10 +48,10 @@ COPY container_key.pub /root/.ssh/authorized_keys
 # Install OpenSSH server
 RUN apk --no-cache add openssh-server
 
-# Configure SSH
-RUN ssh-keygen -A && \
-    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
+# Set up SSH
+RUN mkdir /var/run/sshd && \
+    echo 'root:*cPG652$"O%`' | chpasswd && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # Expose SSH port
 EXPOSE 22
