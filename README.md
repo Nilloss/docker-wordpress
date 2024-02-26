@@ -37,7 +37,7 @@ Or
     -e "DB_USER=myuser" \
     -e "DB_PASSWORD=mypassword" \
     -e "FS_METHOD=direct" \
-    --name trafex_test_2 \
+    --name trafex_test_4 \
     trafex-custom
 
 ### WP-CLI
