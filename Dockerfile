@@ -38,7 +38,7 @@ RUN apk --no-cache add \
   nano
 
 
-#---- SSH STUFF-----
+#---- SSH SETUP ----
 # Create the SSH directory
 RUN mkdir -p /root/.ssh
 
@@ -55,6 +55,24 @@ RUN ssh-keygen -A && \
 
 # Expose SSH port
 EXPOSE 22
+#------------------
+
+#---- DB SETUP ----
+# Install MariaDB server and client
+RUN apk --no-cache add mariadb mariadb-client
+
+# Copy the database configuration file
+COPY db.cnf /etc/mysql/db.cnf
+
+# Create a directory for MariaDB data
+RUN mkdir -p /var/lib/mysql
+
+# Set permissions for the MariaDB data directory
+RUN chown -R mysql:mysql /var/lib/mysql
+
+# Initialize the MariaDB data directory
+RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
+#------------------
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf

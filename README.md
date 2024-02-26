@@ -31,13 +31,14 @@ See [docker-compose.yml](https://github.com/TrafeX/docker-wordpress/blob/master/
 
 Or
 
-    docker run -d -p 80:80 -v /local/folder:/var/www/wp-content \
-    -e "DB_HOST=db" \
-    -e "DB_NAME=wordpress" \
-    -e "DB_USER=wp" \
-    -e "DB_PASSWORD=secret" \
+    docker run -d -p 80:80 -p 22:22 -v
+    -e "DB_HOST=localhost" \
+    -e "DB_NAME=mydatabase" \
+    -e "DB_USER=myuser" \
+    -e "DB_PASSWORD=mypassword" \
     -e "FS_METHOD=direct" \
-    trafex/wordpress
+    --name some_site \
+    trafex-custom
 
 ### WP-CLI
 
