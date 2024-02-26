@@ -42,10 +42,11 @@ RUN apk --no-cache add \
 # Install OpenSSH server
 RUN apk --no-cache add openssh-server
 
-# Set up SSH
-RUN mkdir /var/run/sshd && \
-    echo 'root:*cPG652$"O%`' | chpasswd && \
-    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+# Setup SSH
+RUN mkdir /root/.ssh
+RUN mkdir /var/run/sshd
+ADD authorized_keys /root/.ssh/authorized_keys
+RUN chown root:root /root/.ssh/authorized_keys
 
 # Expose SSH port
 EXPOSE 22
@@ -56,7 +57,10 @@ EXPOSE 22
 RUN apk --no-cache add mariadb mariadb-client
 
 # Copy the database configuration file
-COPY db.cnf /etc/mysql/db.cnf
+COPY my.cnf /etc/mysql/my.cnf
+
+# allow access from any IP
+RUN sed -i '/^bind-address*/ s/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
 
 # Create a directory for MariaDB data
 RUN mkdir -p /var/lib/mysql
@@ -65,7 +69,7 @@ RUN mkdir -p /var/lib/mysql
 RUN chown -R mysql:mysql /var/lib/mysql
 
 # Initialize the MariaDB data directory
-RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
+RUN mysql_install_db --user=root --datadir=/var/lib/mysql
 #------------------
 
 # Configure nginx
