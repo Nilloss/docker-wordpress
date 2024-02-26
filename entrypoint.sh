@@ -3,6 +3,18 @@
 # terminate on errors
 set -e
 
+# Start MariaDB
+mysqld --user=mysql --datadir=/var/lib/mysql --bind-address=0.0.0.0 &
+
+# Wait for MariaDB to start
+sleep 5
+
+# Run the SQL script
+mysql -u root -p < /tmp/mysql-config.sql
+
+# Delete the SQL script
+rm /tmp/mysql-config.sql
+
 # Check if volume is empty
 if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     echo 'Setting up wp-content volume'
