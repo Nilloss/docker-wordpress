@@ -12,13 +12,7 @@ sleep 5
 # Run the SQL script
 #mysql -u root -p < /tmp/mysql-config.sql
 # Run a SQL query to create a database
-mysql -u root -e "CREATE DATABASE wordpress;
-
-CREATE USER 'wordpress_user'@'localhost' IDENTIFIED BY 'wordpress_password';
-
-GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress_user'@'localhost';
-
-FLUSH PRIVILEGES;"
+mysql -u root -e "CREATE DATABASE wordpress;CREATE USER 'wordpress_user'@'localhost' IDENTIFIED BY 'wordpress_password';GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress_user'@'localhost';FLUSH PRIVILEGES;"
 
 # Delete the SQL script
 rm /tmp/mysql-config.sql
