@@ -61,7 +61,7 @@ RUN sed -i '/^bind-address*/ s/127.0.0.1/0.0.0.0/' /etc/my.cnf
 
 # Configure MySQL for WordPress
 COPY mysql-config.sql /tmp/
-RUN /etc/init.d/mysql start \
+RUN rc-service mysql start \
     && mysql -u root < /tmp/mysql-config.sql \
     && rm /tmp/mysql-config.sql
 #------------------
