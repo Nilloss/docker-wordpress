@@ -4,7 +4,7 @@
 set -e
 
 # Start MariaDB
-mysqld --user=root --datadir=/var/lib/mysql --bind-address=0.0.0.0 &
+mysqld --user=mysql --datadir=/var/lib/mysql --bind-address=0.0.0.0 &
 
 # Wait for MariaDB to start
 sleep 5
