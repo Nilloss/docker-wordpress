@@ -34,7 +34,9 @@ RUN apk --no-cache add \
   supervisor \
   curl \
   bash \
-  less
+  less \
+  nano
+
 
 #---- SSH STUFF-----
 # Create the SSH directory
