@@ -31,7 +31,7 @@ See [docker-compose.yml](https://github.com/TrafeX/docker-wordpress/blob/master/
 
 Or
 
-    docker run -d -p 80:80 -p 22:22 -v
+    docker run -d -p 8000:80 -p 22220:22 \
     -e "DB_HOST=localhost" \
     -e "DB_NAME=mydatabase" \
     -e "DB_USER=myuser" \
