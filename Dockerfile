@@ -36,7 +36,8 @@ RUN apk --no-cache add \
   bash \
   less \
   nano \
-  openssh
+  openssh \
+  git
 
 
 #---- SSH SETUP ----
