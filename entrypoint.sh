@@ -10,7 +10,7 @@ set -e
 sleep 5
 
 # Run a SQL query to create a database
-mysql -u root -e "CREATE DATABASE IF NOT EXISTS wordpress;CREATE USER IF NOT EXISTS 'wordpress_user'@'localhost' IDENTIFIED BY 'wordpress_password';GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress_user'@'localhost';FLUSH PRIVILEGES;"
+mysql -u root -e "CREATE DATABASE IF NOT EXISTS wordpress;CREATE USER IF NOT EXISTS 'wordpress_user'@'localhost' IDENTIFIED BY '@>b/034NCaOi';GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress_user'@'localhost';FLUSH PRIVILEGES;"
 
 # Check if volume is empty
 if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then

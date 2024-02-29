@@ -31,14 +31,14 @@ See [docker-compose.yml](https://github.com/TrafeX/docker-wordpress/blob/master/
 
 Or
 
-docker run -d -p 8001:80 -p 22221:22 \
+docker run -d -p 8000:80 -p 22220:22 \
     -e "DB_HOST=localhost" \
     -e "DB_NAME=wordpress" \
     -e "DB_USER=wordpress_user" \
-    -e "DB_PASSWORD=wordpress_password" \
+    -e "DB_PASSWORD=@>b/034NCaOi" \
     -e "FS_METHOD=direct" \
-    --name domain_test_1 \
-    trafex-custom
+    --name ssi_feedback_dev \
+    wp_trafex
 
 ### WP-CLI
 
